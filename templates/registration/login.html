@@ -1,0 +1,51 @@
+﻿{% extends 'base.html'%} {% load static %} {% block content %}
+
+<div class="authentication">
+    <div class="card">
+        <div class="body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="header slideDown">
+                        <div class="logo"><img src="{% static 'assets/images/logo.png'%}" alt="Nexa"></div>
+                        <h1>Nexa Admin</h1>
+                        <ul class="list-unstyled l-social">
+                            <li><a href="https://www.facebook.com/plabondatta26/"><i class="zmdi zmdi-facebook-box"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/plabon-datta/"><i class="zmdi zmdi-linkedin-box"></i></a></li>
+                            <!-- <li><a href="javascript:void(0);"><i class="zmdi zmdi-twitter"></i></a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <form class="col-lg-12" id="sign_in" method="POST">
+                    {% csrf_token %}
+                    <h5 class="title">Sign in to your Account</h5>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="text" class="form-control" id="id_username" name="username">
+                            <label class="form-label">Username</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <input type="password" class="form-control" id="id_password" name="password">
+                            <label class="form-label">Password</label>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-cyan">
+                        <label for="rememberme">Remember Me</label>
+                    </div>
+                    <input type="submit" class="btn btn-raised btn-primary waves-effect" value="SIGN IN">
+                    <a href="sign-up.html" class="btn btn-raised btn-default waves-effect">SIGN UP</a>
+                </form>
+                <div class="col-lg-12">
+
+                </div>
+                <div class="col-lg-12 m-t-20">
+                    <a class="" href="forgot-password.html">Forgot Password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

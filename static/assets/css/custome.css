@@ -1,0 +1,22 @@
+#expected {
+    border-radius: 4px;
+    width: 200px;
+    height: 30px;
+}
+
+.check_inner {
+    width: 100%;
+    height: 34px;
+    background-color: white;
+}
+
+#car_str {
+    width: 50px;
+    height: 50px;
+    border-radius: 33px;
+}
+
+#action_btns {
+    margin-right: 5px;
+    text-decoration: none;
+}

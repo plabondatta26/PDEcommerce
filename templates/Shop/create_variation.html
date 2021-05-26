@@ -1,0 +1,190 @@
+{% extends 'common.html'%} {% load static %} {% block common %}
+<div class="block-header">
+    <div class="row">
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <h2>Product Variation Form
+                <small class="text-muted">PD Online Shop</small>
+            </h2>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <ul class="breadcrumb float-md-right">
+                <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Nexa</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Forms</a></li>
+                <li class="breadcrumb-item active">Basic Form Elements</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <!-- Input -->
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="header">
+
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <h2 class="card-inside-title">Add Variation</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <form product_url="{% url 'category_select'%}" method="post" enctype="multipart/form-data" id="variation_form">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Product Category</label>
+                                    <select class="form-control show-tick" id="category" name="category">
+                                        <option value="">-- Please select --</option>
+                                        {% for c in cate %}
+                                        <option value="{{c.id}}">{{c.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="product">Product Name</label>
+                                    <div class="show-tick" id="prod_id"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Quantity" id="quantity" name="quantity" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Size" id="size" name="size" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Color" id="color" name="color" />
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Expensive To Buy" id="expensive_to_buy" name="expensive_to_buy" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Selling Price" id="selling_price" name="selling_price" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" placeholder="Parchent Of Discount" id="discount" name="discount" />
+                                    </div>
+                                </div>
+                                <div class="form-grop">
+                                    <div class="demo-checkbox">
+                                        <input type="checkbox" id="is_discount" name="is_discount" />
+                                        <label for="is_discount">Discount Available</label></div>
+                                </div>
+
+                                <div class="fallback">
+                                    <label for="img">Product Image  </label>
+                                    <input name="img" id="img" type="file" accept="image/*" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Add Now" class="btn btn-success">
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#category").change(function() {
+            var url = $("#variation_form").attr("product_url");
+            var cat_id = $(this).val();
+            $.ajax({
+                url: url,
+                data: {
+                    'cat_id': cat_id
+                },
+                success: function(data) {
+                    $("#prod_id").html(data);
+                }
+            });
+
+        });
+    </script>
+    <!-- <script>
+        $(document).ready(function() {
+            $('#product').append(
+                '<option value="abc"> jdnijdbjk</option>'
+            );
+        });
+    </script> -->
+
+    <!-- <script>
+        function cat_change() {
+            var cat_id = document.getElementById('category').value
+            var endpoint = '/api/get/product_by/category/'
+            var appenddata1 = "";
+            $.ajax({
+                method: "GET",
+                url: endpoint,
+                data: {
+                    cat_id: cat_id
+                },
+                success: function(data) {
+                    $('#product').append(
+                        '<option value="abc"> jdnijdbjk</option>'
+                    );
+                }
+
+            });
+        }
+    </script> -->
+    <!-- <script>
+        function cat_change() {
+            var endpoint = '/api/get/product_by/category/'
+            var cat_id = document.getElementById('category').value
+            $.ajax({
+                method: "GET",
+                url: endpoint,
+                data: {
+                    cat_id: cat_id
+                },
+                success: function(data) {
+                    // console.log(data);
+                    // let html_data = '<option value="">---------</option>';
+                    // data.forEach(function(data) {
+                    //     html_data += `<option value="${data.id}">${data.title}</option>`
+                    // });
+                    // $("#product").html(html_data);
+                    $("#product option").remove();
+                    for (var i = data.length - 1; i >= 0; i--) {
+                        console.log(data[i].name);
+                        $("#product").append('<option>' + data[i].name + '</option>');
+                    };
+
+
+                }
+            });
+        };
+    </script> -->
+    {% endblock common %}
