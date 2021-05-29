@@ -56,6 +56,15 @@ class CreateVariation(LoginRequiredMixin, View):
         form = VariationModelForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+# model = VariationModel
+# form_class = VariationModelForm
+# success_url = '/product/variation/list/'
+# template_name =
+
+# def get_context_data(self, **kwargs):
+#     context = super(CreateVariation, self).get_context_data(**kwargs)
+#     context['cate'] = ProductCategoryModel.objects.all()
+#     return context
 
 
 def category_select(request):
