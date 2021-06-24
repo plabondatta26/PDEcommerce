@@ -1,0 +1,47 @@
+{% extends 'common.html'%} {% load static %} {% block common %} {% load crispy_forms_tags %}
+<div class="block-header">
+    <div class="row">
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <h2>Product Category Form
+                <small class="text-muted">PD Online Shop</small>
+            </h2>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <ul class="breadcrumb float-md-right">
+                <li class="breadcrumb-item"><a href="/"><i class="zmdi zmdi-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="{% url 'CreateProductCategory'%}">Create New</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'ProductCategorys'%}">Product Categoryes</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <!-- Input -->
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+
+                <div class="body">
+                    <h2 class="card-inside-title">Update Category</h2>
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        {{form.brand}}
+                                        <input type="text" class="form-control" placeholder="Category name" id="name" name="name" value="{{object.name}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="form-control btn btn-success" value="Update Now" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock common %}

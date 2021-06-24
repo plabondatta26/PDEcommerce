@@ -2,8 +2,8 @@
 <div class="block-header">
     <div class="row">
         <div class="col-lg-7 col-md-6 col-sm-12">
-            <h2>Products
-                <small class="text-muted">PD Online Shop</small>
+            <h2>Product Categories
+                <small class="text-muted">Welcome to PD Online Shop</small>
             </h2>
         </div>
         <div class="col-lg-5 col-md-6 col-sm-12">
@@ -20,7 +20,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="header">
-                    <!-- <h2> BASIC EXAMPLE </h2> -->
+                    <h2>Current Categories </h2>
                     <ul class="header-dropdown">
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
@@ -37,36 +37,27 @@
                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable text-center">
                             <thead>
                                 <tr>
-                                    <th>Category</th>
+                                    <th>Id</th>
                                     <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Created</th>
-                                    <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Category</th>
+                                    <th>Id</th>
                                     <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Created</th>
-                                    <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 {% for object in object_list %}
                                 <tr>
-                                    <td>{{object.category}}</td>
+                                    <td>{{object.id}}</td>
                                     <td>{{object.name}}</td>
-                                    <td>{{object.description}}</td>
-                                    <td>{{object.created_on}}</td>
-                                    <td>{{object.updated_on}}</td>
                                     <td>
-                                        <a href="{% url 'ProductDetails' object.id %}" id="action_btns"> <i class="fas fa-info-circle"></i> </a>
-                                        <a href="{% url 'UpdateProduct' object.id %}" id="action_btns"> <i class="far fa-edit"></i> </a>
-                                        <a href="{% url 'DeleteProduct' object.id %}" id="action_btns"> <i class="fas fa-trash"></i> </a>
+                                        <!-- <a href="{% url 'ProductCategoryDetails' object.id %}" id="action_btn"> <i class="zmdi zmdi-info"></i> </a> -->
+                                        <a href="{% url 'BrandUpdateView' object.id %}" id="action_btn"> <i class="zmdi zmdi-edit"></i> </a>
+                                        <a href="{% url 'BrandDelete' object.id %}" id="action_btn"> <i class="zmdi zmdi-delete"></i> </a>
                                     </td>
                                 </tr>
                                 {% endfor%}

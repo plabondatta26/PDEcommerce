@@ -1,0 +1,163 @@
+{% extends 'user_common.html'%} {% load static %} {% block common2 %}
+
+
+<div class="block-header">
+    <div class="row">
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <h2>Product
+                <small class="text-muted">Welcome to Nexa Application</small>
+            </h2>
+        </div>
+        <!-- <div class="col-lg-5 col-md-6 col-sm-12">
+            <ul class="breadcrumb float-md-right">
+                <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Nexa</a></li>
+                <li class="breadcrumb-item"><a href="ec-dashboard.html">eCommerce</a></li>
+                <li class="breadcrumb-item active">Product</li>
+            </ul>
+        </div> -->
+    </div>
+    <div class="row">
+
+        <select class="show-tick user_prod" id="brand" name="brand">
+            <option value="">-- Brands --</option>
+            {% for i in data %} {% for k,v in i.items %}
+                <option value="{{v}}">{{v}}</option>
+            {% endfor %} {% endfor %}
+        </select>
+        <select class="show-tick user_prod" id="category" name="category">
+            <option value="">-- Category --</option>
+            
+            <option value="hsgdhs">hsgdhs</option>
+            <option value="hsgdhs">hsgdhs</option>
+            <option value="hsgdhs">hsgdhs</option>
+            
+        </select>
+        <select class="show-tick user_prod" id="product" name="product">
+            <option value="">-- Product Type --</option>
+            <option value="hsgdhs">hsgdhs</option>
+            <option value="hsgdhs">hsgdhs</option>
+            <option value="hsgdhs">hsgdhs</option>
+            
+        </select>
+
+        <select class="show-tick user_prod" id="product" name="product">
+            <option value="">-- variation --</option>
+            <option value="hsgdhs">hsgdhs</option>
+            <option value="hsgdhs">hsgdhs</option>
+            <option value="hsgdhs">hsgdhs</option>
+            
+        </select>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row clearfix" id="product_parent">
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            method: "GET",
+            url: '/products/on/load/',
+            success: function(data) {
+                $.each(data, function(key, value) {
+                    var products = '<div class="col-lg-3 col-md-4 col-sm-12"> <div class="card product_item"><div class="body"><div class="cp_img"><img src="' +
+                        value.img + '" alt="Product Image" class="img-fluid" /><div class="hover"><h5 id="' + value.id + 'counter"></h5><button class="btn btn-default waves-effect waves-float" onclick="click_plus(' + value.id +
+                        ')"><i class="zmdi zmdi-plus"></i></button><button class="btn btn-default waves-effect waves-float" onclick="click_minus(' + value.id +
+                        ')"><i class="zmdi zmdi-minus"></i></button><button class="btn btn-default waves-effect waves-float" onclick="add_to_cart(' + value.id +
+                        ')"><i class="zmdi zmdi-shopping-cart"></i></a></div></div><div class="product_details"><h5><a href="ec-product-detail.html">' +
+                        value.product.name + '</a></h5><ul class="product_price list-unstyled"> <li class="old_price">' +
+                        value.selling_price + '</li><li class="new_price">' + value.discount_price +
+                        '</li></ul></div></div></div>  </div>'
+                    $('#product_parent').append(products);
+                    // console.log(key, 'key');
+                    // console.log(value, 'val');
+                });
+            }
+        });
+
+        $("#brand").change(function() {
+            var cat_id = $(this).val();
+            alert(cat_id)
+            $.ajax({
+                url: url,
+                data: {
+                    'cat_id': cat_id
+                },
+                success: function(data) {
+                    $("#prod_id").html(data);
+                }
+            });
+
+        });
+    });
+
+    function click_plus(id) {
+        tag_id = '#' + id + 'counter'
+        count = $(tag_id).text()
+        if (count === '') {
+            count = 1
+        } else {
+            count = parseInt(count) + 1
+        }
+        $('#' + id + 'counter').text(count);
+    }
+
+    function click_minus(id) {
+        tag_id = '#' + id + 'counter'
+        count = $(tag_id).text()
+        if (count === '' || count === '0' || count === 0) {
+            count = 0
+        } else {
+            count = parseInt(count) - 1
+        }
+        $('#' + id + 'counter').text(count);
+    }
+
+    function get_category() {
+        $.ajax({
+            url: '/get/product/category/',
+            type: 'get',
+            success: function(data) {
+                $('#cat_btn').hide();
+                $.each(data, function(key, value) {
+                    $('#user_category').append('<option value="' + value.id + '">' + value.name + '</option>');
+                });
+                $('#user_category').show()
+            }
+        })
+    }
+
+    function add_to_cart(id) {
+        $variation = id
+        tag_id = '#' + id + 'counter'
+        count = $(tag_id).text()
+        if (count === '' || count === '0' || count === 0) {
+            count = 1
+        }
+        if (typeof(count) === 'string') {
+            count == parseInt(count)
+        }
+        if (count > 0) {
+            $.ajax({
+                url: '/add/to/cart/',
+                type: 'post',
+                data: {
+                    variation: $variation,
+                    quantity: count,
+                },
+
+                success: function(data) {
+                    $('#' + id + 'counter').text('');
+                }
+
+            });
+        }
+    }
+
+    function brand_click(name) {
+        alert(name)
+    }
+</script>
+{% endblock common2 %}

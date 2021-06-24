@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Shop',
     'Payment',
     'crispy_forms',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 AUTH_USER_MODEL = 'Accounts.UserModel'
@@ -140,3 +143,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+INTERNAL_IPS = [
+    '127.0.0.1',
+]

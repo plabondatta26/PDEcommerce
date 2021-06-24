@@ -10,6 +10,13 @@
     background-color: white;
 }
 
+#sub_btn {
+    position: relative;
+    width: 150px;
+    display: block;
+    float: right;
+}
+
 #car_str {
     width: 50px;
     height: 50px;
@@ -19,4 +26,72 @@
 #action_btns {
     margin-right: 5px;
     text-decoration: none;
+}
+
+#variatin_image {
+    max-height: 60px;
+    max-width: 60px;
+}
+
+#action_btn {
+    padding: 8px;
+}
+
+.delete-body {
+    height: 400px;
+}
+
+.delete-confirmation {
+    display: flex;
+    justify-content: center;
+    transform: translate(0%, 50%);
+}
+
+.card-color {
+    background-color: #ffdb00;
+    width: 500px;
+    text-align: center;
+    padding: 18px;
+}
+
+.card-color form a,
+.card-color form input {
+    width: 70px;
+    border-radius: 7px !important;
+    margin: 20px 80px;
+    color: white;
+}
+
+.filter_btn {}
+
+.product_parent {
+    display: flex;
+}
+
+#user_category,
+#user_prod,
+#user_var {
+    width: 150px !important;
+}
+
+#user_category option,
+#user_prod option,
+#user_var option {
+    width: 300px !important;
+}
+
+#cat,
+#prod,
+#var {
+    display: flex;
+    margin: 0px 10px;
+    margin-top: 15px;
+}
+
+li.active.child_list {
+    margin-left: 30px;
+}
+
+.user_prod {
+    margin-right: 10px;
 }

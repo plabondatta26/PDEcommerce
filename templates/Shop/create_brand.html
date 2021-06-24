@@ -2,7 +2,7 @@
 <div class="block-header">
     <div class="row">
         <div class="col-lg-7 col-md-6 col-sm-12">
-            <h2>Product Category Form
+            <h2>Brand Form
                 <small class="text-muted">PD Online Shop</small>
             </h2>
         </div>
@@ -22,37 +22,18 @@
             <div class="card">
 
                 <div class="body">
-                    <h2 class="card-inside-title">Add A Category</h2>
+                    <h2 class="card-inside-title">Add A Brand</h2>
                     <div class="row clearfix">
                         <div class="col-sm-12">
-                            <div class="row">
-                                <h3>{{fff}}</h3>
-                                {% if form.subject.errors %}
-                                <ol>
-                                    {% for error in form.subject.errors %}
-                                    <li><strong>{{ error|escape }}</strong></li>
-                                    {% endfor %}
-                                </ol>
-                                {% endif %}</div>
                             <form action="" method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <label> Category</label>
-                                    <select class="form-control show-tick" id="brand" name="brand">
-                             
-                                        {% for b in data %}
-                                        <option value="{{b.id}}">{{b.name}}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-
-                                <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Category name" id="name" name="name" />
+                                        <input type="text" class="form-control" placeholder="Brand name" id="name" name="name" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="form-control btn btn-success" value="Add Now" id="sub_btn" />
+                                    <input type="submit" class="form-control btn btn-success" id="sub_btn" value="Add Now" />
                                 </div>
                             </form>
                         </div>

@@ -4,6 +4,7 @@ from django_countries.fields import CountryField
 # Create your models here.
 
 
+# email, contact, address,
 class UserModel(AbstractUser):
     contact = models.CharField(max_length=20, blank=False, unique=True)
     country = CountryField()

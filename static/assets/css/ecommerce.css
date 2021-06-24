@@ -74,12 +74,16 @@
 }
 
 .product_item .product_details {
-    padding-top: 110%;
+    padding-top: 70%;
     text-align: center
 }
 
 .product_item .product_details h5 {
-    margin-bottom: 5px
+    margin-bottom: 5px;
+}
+
+#per_product {
+    margin-left: 5px;
 }
 
 .product_item .product_details h5 a {

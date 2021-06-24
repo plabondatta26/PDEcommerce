@@ -1,0 +1,19 @@
+{% extends 'common.html'%} {% load static %} {% block common %}
+<div class="card">
+    <div class="body">
+        <div class="delete-body">
+            <div class="delete-confirmation">
+                <div class="card card-color">
+                    <h3>Are you sure !</h3>
+                    <h4> You want to delete this item?</h4>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-info">No</a>
+                        <input type="submit" class="btn btn-danger" value="Yes">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock common %}

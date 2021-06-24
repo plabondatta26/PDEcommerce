@@ -15395,7 +15395,7 @@ section.content {
 
 .bootstrap-select.btn-group.show-tick>.btn {
     border-bottom: 1px solid #ddd !important;
-    padding-left: 0
+    padding-left: 6px;
 }
 
 .bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {

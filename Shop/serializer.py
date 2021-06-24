@@ -15,3 +15,10 @@ class ProductSerializer(serializers.ModelSerializer):
         model = ProductModel
         fields = '__all__'
 
+
+class VariationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VariationModel
+        fields = '__all__'
+        depth = 2
+

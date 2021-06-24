@@ -38,30 +38,36 @@
                             <thead>
                                 <tr>
                                     <th>Category</th>
-                                    <th>Name</th>
+                                    <th>Product Name</th>
                                     <th>Description</th>
+                                    <th>Image</th>
                                     <th>Quantity</th>
-                                    <th>size</th>
-                                    <th>color</th>
-                                    <th>sold</th>
-                                    <th>expensive_to_buy</th>
-                                    <th>selling_price</th>
-                                    <th>img</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
+                                    <th>Bying Expense</th>
+                                    <th>Selling Price</th>
+                                    <th>Discount</th>
+                                    <th>Discount Status</th>
                                     <th>Quantity</th>
-                                    <th>discount</th>
-                                    <th>is_discount</th>
-                                    <th>discount</th>
-
+                                    <th>Sold</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>Category</th>
-                                    <th>Product</th>
-                                    <th>Product Description</th>
+                                    <th>Product Name</th>
+                                    <th>Description</th>
+                                    <th>Image</th>
                                     <th>Quantity</th>
-                                    <th>Updated</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
+                                    <th>Bying Expense</th>
+                                    <th>Selling Price</th>
+                                    <th>Discount</th>
+                                    <th>Discount Status</th>
+                                    <th>Quantity</th>
+                                    <th>Sold</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -71,20 +77,28 @@
                                     <td>{{object.category}}</td>
                                     <td>{{object.product}}</td>
                                     <td>{{object.product.description}}</td>
-                                    <td>{{object.img}}</td>
+                                    <td>
+                                        <img src="{{object.img.url}}" alt="variation image" id="variatin_image">
+                                    </td>
                                     <td>{{object.quantity}}</td>
                                     <td>{{object.size}}</td>
                                     <td>{{object.color}}</td>
-                                    <td>{{object.sold}}</td>
                                     <td>{{object.expensive_to_buy}}</td>
                                     <td>{{object.selling_price}}</td>
-                                    <td>{{object.is_discount}}</td>
-                                    <td>{{object.discount}}</td>
-
+                                    <td>{{object.discount}} %</td>
+                                    {% if object.is_discount %}
+                                    <td> Available</td>
+                                    {% else %}
+                                    <td> N/A</td>
+                                    {% endif %}
+                                    <td>{{object.quantity}}</td>
+                                    <td>{{object.sold}}</td>
                                     <td>
-                                        <a href="#" id="action_btns"> <i class="fas fa-info-circle"></i> </a>
-                                        <a href="#" id="action_btns"> <i class="far fa-edit"></i> </a>
-                                        <a href="#" id="action_btns"> <i class="fas fa-trash"></i> </a>
+                                        <div class="row" id="action_btn">
+                                            <a href="#" id="action_btns"> <i class="fas fa-info-circle"></i> </a>
+                                            <a href="#" id="action_btns"> <i class="far fa-edit"></i> </a>
+                                            <a href="{% url 'DeleteProduct' object.id %}" id="action_btns"> <i class="fas fa-trash"></i> </a>
+                                        </div>
                                     </td>
                                 </tr>
                                 {% endfor%}
