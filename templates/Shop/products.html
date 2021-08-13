@@ -23,7 +23,8 @@
                     <!-- <h2> BASIC EXAMPLE </h2> -->
                     <ul class="header-dropdown">
                         <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
                             <ul class="dropdown-menu pull-right">
                                 <li><a href="javascript:void(0);">Action</a></li>
                                 <li><a href="javascript:void(0);">Another action</a></li>
@@ -34,23 +35,26 @@
                 </div>
                 <div class="body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable text-center">
+                        <table
+                            class="table table-bordered table-striped table-hover js-basic-example dataTable text-center">
                             <thead>
                                 <tr>
+                                    <th>Created</th>
+                                    <th>Brand</th>
                                     <th>Category</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    <th>Created</th>
                                     <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>Created</th>
+                                    <th>Brand</th>
                                     <th>Category</th>
                                     <th>Name</th>
                                     <th>Description</th>
-                                    <th>Created</th>
                                     <th>Updated</th>
                                     <th>Action</th>
                                 </tr>
@@ -58,15 +62,19 @@
                             <tbody>
                                 {% for object in object_list %}
                                 <tr>
+                                    <td>{{object.created_on}}</td>
+                                    <td>{{object.brand}}</td>
                                     <td>{{object.category}}</td>
                                     <td>{{object.name}}</td>
                                     <td>{{object.description}}</td>
-                                    <td>{{object.created_on}}</td>
                                     <td>{{object.updated_on}}</td>
                                     <td>
-                                        <a href="{% url 'ProductDetails' object.id %}" id="action_btns"> <i class="fas fa-info-circle"></i> </a>
-                                        <a href="{% url 'UpdateProduct' object.id %}" id="action_btns"> <i class="far fa-edit"></i> </a>
-                                        <a href="{% url 'DeleteProduct' object.id %}" id="action_btns"> <i class="fas fa-trash"></i> </a>
+                                        <a href="{% url 'ProductDetails' object.id %}" id="action_btns"> <i
+                                                class="fas fa-info-circle"></i> </a>
+                                        <a href="{% url 'UpdateProduct' object.id %}" id="action_btns"> <i
+                                                class="far fa-edit"></i> </a>
+                                        <a href="{% url 'DeleteProduct' object.id %}" id="action_btns"> <i
+                                                class="fas fa-trash"></i> </a>
                                     </td>
                                 </tr>
                                 {% endfor%}

@@ -33,13 +33,14 @@
                                     <li><strong>{{ error|escape }}</strong></li>
                                     {% endfor %}
                                 </ol>
-                                {% endif %}</div>
+                                {% endif %}
+                            </div>
                             <form action="" method="post">
                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <label> Category</label>
+                                    <label>Brand</label>
                                     <select class="form-control show-tick" id="brand" name="brand">
-                             
+                                        <option value="">---Please Select ---</option>
                                         {% for b in data %}
                                         <option value="{{b.id}}">{{b.name}}</option>
                                         {% endfor %}

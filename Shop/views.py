@@ -107,9 +107,11 @@ class DeleteProductCategory(LoginRequiredMixin, DeleteView):
 class CreateProduct(LoginRequiredMixin, View):
     def get(self, request):
         form = ProductModelForm()
+        brand = BrandModel.objects.all().order_by('-id')
         category = ProductCategoryModel.objects.all().order_by('-id')
         context = {
             'form': form,
+            'brand': brand,
             'category': category
         }
         return render(request, 'Shop/crete_prod.html', context)
@@ -119,6 +121,7 @@ class CreateProduct(LoginRequiredMixin, View):
         if form.is_valid():
             form.save()
             return redirect('Products')
+        return redirect('CreateProduct')
 
 
 class Products(LoginRequiredMixin, ListView):
@@ -169,28 +172,33 @@ class DeleteProduct(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('Products')
 
 
-class CreateVariation(LoginRequiredMixin, CreateView):
-    form_class = VariationModelForm
-    template_name = 'Shop/create_variation.html'
-    success_url = '/product/variation/list/'
-
-    def post(self, request):
+def CreateVariation(request):
+    form = VariationModelForm()
+    cate = ProductCategoryModel.objects.all()
+    if request.method == 'POST':
         form = VariationModelForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('VariationList')
+    context = {
+        'form':form,
+        'cate': cate,
+    }
+    return render(request, 'Shop/create_variation.html', context)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        cate = ProductCategoryModel.objects.all()
-        context['cate'] = cate
-        return context
+
+def brand_select(request):
+    br_id = request.GET.get('br_id')
+    element = 'category'
+    category = ProductCategoryModel.objects.filter(brand=br_id)
+    return render(request, 'Shop/CategorySelect.html', {'object': category, 'element': element})
 
 
 def category_select(request):
+    element = 'product'
     cat_id = request.GET.get('cat_id')
     products = ProductModel.objects.filter(category=cat_id)
-    return render(request, 'Shop/CategorySelect.html', {'products': products})
+    return render(request, 'Shop/CategorySelect.html', {'object': products, 'element':element})
     
 
 class VariationList(LoginRequiredMixin, ListView):
@@ -208,9 +216,13 @@ class UserProductView(TemplateView):
     template_name = 'Shop/user_product.html'
 
     def get_context_data(self, **kwargs):
-        data = VariationModel.objects.values('brand').distinct()
+        brand = BrandModel.objects.all()
+        category = ProductCategoryModel.objects.all().values('name').distinct()
+        product = ProductModel.objects.all().values('name').distinct()
         context = super(UserProductView, self).get_context_data(**kwargs)
-        context.update({'data': data})
+        context['brand'] = brand
+        context['category'] = category
+        context['product'] = product
         return context
 
 
@@ -269,4 +281,15 @@ class GetCategory(TemplateView):
         context = super(GetCategory, self).get_context_data(**kwargs)
         data = ProductCategoryModel.objects.values('name')
         context.update({'data':data})
+        return context
+
+
+class UserAddToCartList(ListView):
+    model = CartModel
+    template_name = 'Shop/cartDetails.html'
+
+    def get_context_data(self, **kwargs):
+        user_id = self.request.user.id
+        context = super(UserAddToCartList, self).get_context_data(**kwargs)
+        context['object_data'] = CartModel.objects.filter(user_id=user_id)
         return context

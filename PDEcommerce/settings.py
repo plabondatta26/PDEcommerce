@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'Payment',
     'crispy_forms',
     'debug_toolbar',
+    'django_elasticsearch_dsl',
+    'django_elasticsearch_dsl_drf',
 ]
 
 MIDDLEWARE = [
@@ -81,19 +83,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'PDEcommerce.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pdecommerce',
+        'USER': 'root',
+        'PASSWORD': 'pdp%58*59',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
-
-
-# Password validation
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}  # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -110,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -136,7 +148,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-   BASE_DIR/'static'
+    BASE_DIR / 'static'
 ]
 
 MEDIA_URL = '/media/'
@@ -146,3 +158,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+HASHIDS_SALT = 'AsdErF5%$fdgd/PoLOPsadws32@#/25sdfgdgfTZ0O%/jkjdfsfgdfghfhdg'

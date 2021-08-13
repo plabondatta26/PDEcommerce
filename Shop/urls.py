@@ -1,7 +1,10 @@
-from django.urls import path
+from django.urls import path, register_converter
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import *
+
+from Accounts.utils import HashIdConverter
+register_converter(HashIdConverter, "hashid")
 
 urlpatterns = [
     # Brands CRUD
@@ -27,7 +30,8 @@ urlpatterns = [
 
 
     # Variation CRUD
-    path('create/product/variation/', CreateVariation.as_view(), name='CreateVariation'),
+    path('create/product/variation/', CreateVariation, name='CreateVariation'),
+    path('api/get/category_by/brand/', brand_select, name='brand_select'),
     path('api/get/product_by/category/', category_select, name='category_select'),
     path('product/variation/list/', VariationList.as_view(), name='VariationList'),
     path('variation/<int:pk>/update/', VariationList.as_view(), name='VariationList'),
@@ -42,6 +46,7 @@ urlpatterns = [
     path('get/product/', GetProduct.as_view(), name='GetProduct'),
     path('get/variation/', GetVariation.as_view(), name='GetVariation'),
     path('add/to/cart/', add_to_cart, name='add_to_cart'),
+    path('cart/details/', UserAddToCartList.as_view(), name='user_add_to_cart_list'),
 
     # product filter section
     path('get/category/data/', GetCategory.as_view(), name='GetCategory'),

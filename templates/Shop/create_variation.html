@@ -37,11 +37,19 @@
                     <h2 class="card-inside-title">Add Variation</h2>
                     <div class="row clearfix">
                         <div class="col-sm-12">
+                            {% for field in form %}
+                            <div class="fieldWrapper">
+
+                                {% if field.errors %}
+                                <p class="alert alert-danger"> {{ field.label_tag }} is required</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
                             <form product_url="{% url 'category_select'%}" method="post" enctype="multipart/form-data" id="variation_form">
                                 {% csrf_token %}
                                 <div class="form-group">
                                     <label>Product Category</label>
-                                    <select class="form-control show-tick" id="category" name="category">
+                                    <select class="form-control show-tick" id="category" name="category" required>
                                         <option value="">-- Please select --</option>
                                         {% for c in cate %}
                                         <option value="{{c.id}}">{{c.name}}</option>
@@ -51,7 +59,7 @@
 
                                 <div class="form-group">
                                     <label for="product">Product Name</label>
-                                    <div class="show-tick" id="prod_id"></div>
+                                    <div id="prod_id"></div>
                                 </div>
 
                                 <div class="form-group">
@@ -81,28 +89,30 @@
 
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Selling Price" id="selling_price" name="selling_price" />
+                                        <input type="text" class="form-control" placeholder="Selling Price" id="selling_price" name="selling_price" onkeyup="calculate()" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" placeholder="Parchent Of Discount" id="discount" name="discount" />
+                                        <input type="text" class="form-control" placeholder="Percentage Of Discount" id="discount" name="discount" onkeyup="calculate()" required />
+                                        <input type="text" class="form-control" placeholder="Price after Discount" id="discount_price" name="discount_price" style="display:none" />
                                     </div>
                                 </div>
                                 <div class="form-grop">
                                     <div class="demo-checkbox">
                                         <input type="checkbox" id="is_discount" name="is_discount" />
-                                        <label for="is_discount">Discount Available</label></div>
+                                        <label for="is_discount">Discount Available</label>
+                                    </div>
                                 </div>
 
                                 <div class="fallback">
-                                    <label for="img">Product Image  </label>
+                                    <label for="img">Product Image </label>
                                     <input name="img" id="img" type="file" accept="image/*" />
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="submit" value="Add Now" class="btn btn-success">
+                                    <input type="submit" value="Add Now" class="btn btn-success" id="sub_btn">
                                 </div>
 
                             </form>
@@ -117,6 +127,7 @@
 
     <script>
         $("#category").change(function() {
+            $("#prod_id").empty()
             var url = $("#variation_form").attr("product_url");
             var cat_id = $(this).val();
             $.ajax({
@@ -125,66 +136,38 @@
                     'cat_id': cat_id
                 },
                 success: function(data) {
+                    console.log(data);
                     $("#prod_id").html(data);
                 }
             });
 
         });
     </script>
-    <!-- <script>
-        $(document).ready(function() {
-            $('#product').append(
-                '<option value="abc"> jdnijdbjk</option>'
-            );
+
+    <script>
+        $("#variation_form").submit(function(event) {
+
+            const cb = document.getElementById('is_discount');
+            var dis = parseInt(document.getElementById('discount').value);
+            var sl = parseInt(document.getElementById('selling_price').value);
+            if (cb.checked == true) {
+                if (dis === '' || sl === '') {
+                    return false
+                    event.preventDefault();
+                }
+
+            }
+
         });
-    </script> -->
-
-    <!-- <script>
-        function cat_change() {
-            var cat_id = document.getElementById('category').value
-            var endpoint = '/api/get/product_by/category/'
-            var appenddata1 = "";
-            $.ajax({
-                method: "GET",
-                url: endpoint,
-                data: {
-                    cat_id: cat_id
-                },
-                success: function(data) {
-                    $('#product').append(
-                        '<option value="abc"> jdnijdbjk</option>'
-                    );
-                }
-
-            });
+    </script>
+    <script>
+        function calculate() {
+        var d_p = ''
+            var dis = parseInt(document.getElementById('discount').value);
+            var sl = parseInt(document.getElementById('selling_price').value);
+            am = (sl * dis) / 100
+            d_P = sl - am
+            document.getElementById('discount_price').value = d_P
         }
-    </script> -->
-    <!-- <script>
-        function cat_change() {
-            var endpoint = '/api/get/product_by/category/'
-            var cat_id = document.getElementById('category').value
-            $.ajax({
-                method: "GET",
-                url: endpoint,
-                data: {
-                    cat_id: cat_id
-                },
-                success: function(data) {
-                    // console.log(data);
-                    // let html_data = '<option value="">---------</option>';
-                    // data.forEach(function(data) {
-                    //     html_data += `<option value="${data.id}">${data.title}</option>`
-                    // });
-                    // $("#product").html(html_data);
-                    $("#product option").remove();
-                    for (var i = data.length - 1; i >= 0; i--) {
-                        console.log(data[i].name);
-                        $("#product").append('<option>' + data[i].name + '</option>');
-                    };
-
-
-                }
-            });
-        };
-    </script> -->
+    </script>
     {% endblock common %}

@@ -1,0 +1,151 @@
+{% extends 'user_common.html'%} {% load static %} {% block common2 %}
+<div class="block-header">
+    <div class="row">
+        <div class="col-lg-7 col-md-6 col-sm-12">
+            <h2>Cart Details
+                <small class="text-muted">PD Online Shop</small>
+            </h2>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-12">
+            <ul class="breadcrumb float-md-right">
+                <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Nexa</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Tables</a></li>
+                <li class="breadcrumb-item active">Jquery DataTables</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="header">
+                    <!-- <h2> BASIC EXAMPLE </h2> -->
+                    <ul class="header-dropdown">
+                        <a href="#" class="btn btn-info">Checkout Now</a>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another action</a></li>
+                                <li><a href="javascript:void(0);">Something else here</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable text-center">
+                            <thead>
+                                <tr>
+                                    <th>Created</th>
+                                    <th>Brand</th>
+                                    <th>Category</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Created</th>
+                                    <th>Brand</th>
+                                    <th>Category</th>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for object in object_data %}
+                                <tr>
+                                    <td>{{object.created_on}}</td>
+                                    {% if object.variation.category.brand.name %}
+                                    <td>{{object.variation.category.brand.name}}</td>
+                                    {% else %}
+                                    <td>N/A</td>
+                                    {% endif %} {% if object.variation.category.name %}
+                                    <td>{{object.variation.category.name}}</td>
+                                    {% else %}
+                                    <td>N/A</td>
+                                    {% endif %}
+                                    <td>{{object.variation.product.name}}</td>
+                                    <td id="{{object.id}}counter">{{object.quantity}}</td>
+
+                                    <td>
+                                        <button class="btn btn-default waves-effect waves-float" onclick="click_plus({{object.id}})"><i class="zmdi zmdi-plus"></i></button>
+                                        <button class="btn btn-default waves-effect waves-float" onclick="click_minus({{object.id}})"><i class="zmdi zmdi-minus"></i></button>
+                                        <button class="btn btn-default waves-effect waves-float" onclick="click_remove({{object.id}})"><i class="zmdi zmdi-delete"></i></button>
+                                    </td>
+                                </tr>
+                                {% endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function click_plus(id) {
+        tag_id = '#' + id + 'counter'
+        count = $(tag_id).text()
+        alert(count)
+        if (count === '') {
+            count = 1
+        } else {
+            count = parseInt(count) + 1
+        }
+        $('#' + id + 'counter').text(count);
+        $.ajax({
+            method: "POST",
+            url: '/api/cart/up/',
+            data: {
+                'obj_id': id,
+                'value': $(tag_id).text(),
+            },
+            success: function(data) {
+
+            }
+        });
+
+    }
+
+    function click_minus(id) {
+        tag_id = '#' + id + 'counter'
+        count = $(tag_id).text()
+        if (count === '' || count === '0' || count === 0) {
+            count = 0
+        } else {
+            count = parseInt(count) - 1
+        }
+        $('#' + id + 'counter').text(count);
+        $.ajax({
+            method: "POST",
+            url: '/api/cart/up/',
+            data: {
+                'obj_id': id,
+                'value': $(tag_id).text(),
+            },
+            success: function(data) {
+
+            }
+        });
+    }
+
+    function click_remove(id) {
+        $.ajax({
+            method: "POST",
+            url: '/api/cart/remove/',
+            data: {
+                'obj_id': id,
+            },
+            success: function(data) {
+                location.reload();
+            }
+        });
+    }
+</script>
+{% endblock common2 %}

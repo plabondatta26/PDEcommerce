@@ -17,42 +17,91 @@
         </div> -->
     </div>
     <div class="row">
+        <form action="">
+            <select class="show-tick user_prod" id="brand" name="brand">
+                <option value="">-- Brands --</option>
+                {% for i in brand %} 
+                <option value="{{i.id}}">{{i.name}}</option>
+                {% endfor %} 
+            </select>
+            <select class="show-tick user_prod" id="category" name="category">
+                <option value="">-- Category --</option>
+                {% for i in category %} 
+                <option value="{{i.id}}">{{i.name}}</option>
+                {% endfor %} 
+            </select>
+            <select class="show-tick user_prod" id="product" name="product">
+                <option value="">-- Product Type --</option>
+                {% for i in product %} 
+                <option value="{{i.id}}">{{i.name}}</option>
+                {% endfor %}
+            </select>
 
-        <select class="show-tick user_prod" id="brand" name="brand">
-            <option value="">-- Brands --</option>
-            {% for i in data %} {% for k,v in i.items %}
-                <option value="{{v}}">{{v}}</option>
-            {% endfor %} {% endfor %}
-        </select>
-        <select class="show-tick user_prod" id="category" name="category">
-            <option value="">-- Category --</option>
-            
-            <option value="hsgdhs">hsgdhs</option>
-            <option value="hsgdhs">hsgdhs</option>
-            <option value="hsgdhs">hsgdhs</option>
-            
-        </select>
-        <select class="show-tick user_prod" id="product" name="product">
-            <option value="">-- Product Type --</option>
-            <option value="hsgdhs">hsgdhs</option>
-            <option value="hsgdhs">hsgdhs</option>
-            <option value="hsgdhs">hsgdhs</option>
-            
-        </select>
+            <select class="show-tick user_prod" id="product" name="product">
+        <option value="">-- variation --</option>
+        <option value="hsgdhs">hsgdhs</option>
+        <option value="hsgdhs">hsgdhs</option>
+        <option value="hsgdhs">hsgdhs</option>
 
-        <select class="show-tick user_prod" id="product" name="product">
-            <option value="">-- variation --</option>
-            <option value="hsgdhs">hsgdhs</option>
-            <option value="hsgdhs">hsgdhs</option>
-            <option value="hsgdhs">hsgdhs</option>
-            
-        </select>
+    </select>
+        </form>
     </div>
 </div>
 <div class="container-fluid">
     <div class="row clearfix" id="product_parent">
 
+        <!-- {% for product in object %}
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="card product_item">
+                <div class="body">
+                    <div class="cp_img">
+                        <img src="{{product.img.url}}" alt="Product" class="img-fluid" />
+                        <div class="hover">
+                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float"><i
+                                    class="zmdi zmdi-plus"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float"><i
+                                    class="zmdi zmdi-shopping-cart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product_details">
+                        <h5><a href="ec-product-detail.html">Simple Black Clock</a></h5>
+                        <ul class="product_price list-unstyled">
+                            <li class="old_price">$16.00</li>
+                            <li class="new_price">$13.00</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>{% endfor %} -->
+
     </div>
+    <!-- <div class="row clearfix" id="product_parent">
+        {% for product in object%}
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="card product_item">
+                <div class="body">
+                    <div class="cp_img">
+                        <img src="{{product.img.url}}" alt="Product" class="img-fluid"
+                            style="height: 150px;width: 150px;">
+                        <div class="hover">
+                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float"><i
+                                    class="zmdi zmdi-plus"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-default waves-effect waves-float"><i
+                                    class="zmdi zmdi-shopping-cart"></i></a>
+                        </div>
+                    </div>
+                    <div class="product_details">
+                        <h5><a href="ec-product-detail.html">Simple Black Clock</a></h5>
+                        <ul class="product_price list-unstyled">
+                            <li class="old_price">$16.00</li>
+                            <li class="new_price">$13.00</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+    </div> -->
 </div>
 
 <script>
@@ -61,6 +110,7 @@
             method: "GET",
             url: '/products/on/load/',
             success: function(data) {
+
                 $.each(data, function(key, value) {
                     var products = '<div class="col-lg-3 col-md-4 col-sm-12"> <div class="card product_item"><div class="body"><div class="cp_img"><img src="' +
                         value.img + '" alt="Product Image" class="img-fluid" /><div class="hover"><h5 id="' + value.id + 'counter"></h5><button class="btn btn-default waves-effect waves-float" onclick="click_plus(' + value.id +
@@ -71,15 +121,12 @@
                         value.selling_price + '</li><li class="new_price">' + value.discount_price +
                         '</li></ul></div></div></div>  </div>'
                     $('#product_parent').append(products);
-                    // console.log(key, 'key');
-                    // console.log(value, 'val');
                 });
             }
         });
 
         $("#brand").change(function() {
             var cat_id = $(this).val();
-            alert(cat_id)
             $.ajax({
                 url: url,
                 data: {
@@ -160,4 +207,6 @@
         alert(name)
     }
 </script>
+
+
 {% endblock common2 %}

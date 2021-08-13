@@ -50,7 +50,7 @@
 .product_item .cp_img {
     position: absolute;
     top: 5px;
-    left: 50%;
+    left: 50%;    text-align: center;
     transform: translate(-50%);
     -webkit-transform: translate(-50%);
     -ms-transform: translate(-50%);
@@ -64,7 +64,9 @@
 
 .product_item .cp_img img {
     transition: all 0.2s ease-in-out;
-    border-radius: 6px
+    border-radius: 6px;
+    height: 250px;
+    width: 200px;
 }
 
 .product_item .cp_img .hover {
@@ -73,8 +75,18 @@
     margin-top: 10px
 }
 
+.not_number{
+        margin-top: -28px;
+        position: absolute;
+        margin-left: 10px;
+        background-color: #ffdf00;
+        color: #ffffff;
+        min-width: 10px;
+        border-radius: 4px;
+    }
+    
 .product_item .product_details {
-    padding-top: 70%;
+    padding-top: 110%;
     text-align: center
 }
 

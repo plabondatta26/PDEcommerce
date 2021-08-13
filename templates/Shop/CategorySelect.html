@@ -1,82 +1,9 @@
-<!DOCTYPE html> {% load static %}
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-
-    <title>PD Online Shop</title>
-    <!-- Favicon-->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css'%}" />
-    <link rel="stylesheet" href="{% static 'assets/plugins/morrisjs/morris.css'%}" />
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="{% static 'assets/css/main.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/css/custome.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/css/ecommerce.css'%}">
-    <link href="{% static 'assets/plugins/bootstrap-select/css/bootstrap-select.css'%}" rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'assets/css/color_skins.css'%}">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
-</head>
-
-<body>
-
-    <select id="product" class="form-control show-tick" name="product">
-{% if products%}                               
-{% for product in products %}
-<option value="{{ product.id }}">{{ product.name }}</option>
-{% endfor %}
-{% else %}
-<option value="">Nothing to Show</option>
-{% endif %}
-</select>
-    <script src="{% static 'assets/bundles/libscripts.bundle.js'%}"></script>
-    <!-- Lib Scripts Plugin Js -->
-    <script src="{% static 'assets/bundles/vendorscripts.bundle.js'%}"></script>
-    <!-- Lib Scripts Plugin Js -->
-    <script src="{% static 'assets/bundles/jvectormap.bundle.js'%}"></script>
-    <!-- JVectorMap Plugin Js -->
-    <script src="{% static 'assets/bundles/morrisscripts.bundle.js'%}"></script>
-    <!-- Morris Plugin Js -->
-    <script src="{% static 'assets/bundles/sparkline.bundle.js'%}"></script>
-    <!-- Sparkline Plugin Js -->
-    <script src="{% static 'assets/bundles/knob.bundle.js'%}"></script>
-    <!-- Jquery Knob Plugin Js -->
-    <!-- Lib Scripts Plugin Js -->
-
-    <script src="{% static 'assets/plugins/autosize/autosize.js'%}"></script>
-    <!-- Autosize Plugin Js -->
-    <script src="{% static 'assets/plugins/momentjs/moment.js'%}"></script>
-    <!-- Moment Plugin Js -->
-    <!-- Bootstrap Material Datetime Picker Plugin Js -->
-    <script src="{% static 'assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js'%}"></script>
-
-    <script src="{% static 'assets/bundles/mainscripts.bundle.js'%}"></script>
-
-    <script src="{% static 'assets/js/pages/ecommerce.js"></script>
-    <script src="{% static 'assets/js/pages/charts/jquery-knob.min.js'%}"></script>
-    <!-- Custom Js -->
-    <script src="{% static 'assets/js/pages/forms/basic-form-elements.js'%}"></script>
-
-
-    <script src="{% static 'assets/bundles/datatablescripts.bundle.js'%}"></script>
-    <script src="{% static 'assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js'%}"></script>
-    <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js'%}"></script>
-    <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js'%}"></script>
-    <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.flash.min.js'%}"></script>
-    <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.html5.min.js'%}"></script>
-    <script src="{% static 'assets/plugins/jquery-datatable/buttons/buttons.print.min.js'%}"></script>
-
-
-    <!-- Custom Js -->
-    <script src="{% static 'assets/js/pages/tables/jquery-datatable.js'%}"></script>
-
-</body>
-
-</html>
+<select id="{{element}}" class="form-control show-tick" name="{{element}}" required>
+        {% if object%}
+        {% for obj in object %}
+        <option value="{{ obj.id }}">{{ obj.name }}</option>
+        {% endfor %}
+        {% else %}
+        <option value="">Nothing to Show</option>
+        {% endif %}
+    </select>
