@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 ]
-DISABLE_COLLECTSTATIC = 1
+
 AUTH_USER_MODEL = 'Accounts.UserModel'
 
 ROOT_URLCONF = 'PDEcommerce.urls'
