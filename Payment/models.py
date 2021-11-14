@@ -34,3 +34,19 @@ class TransactionModel(models.Model):
 
     def __str__(self):
         return self.tran_id
+
+
+class BillingAndShippingAddress(models.Model):
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    bill_add = models.TextField(max_length=1000, blank=False, null=False)
+    bill_city = models.CharField(max_length=100, blank=False, null=False)
+    bill_division = models.CharField(max_length=100, blank=False, null=False)
+    bill_country = models.CharField(max_length=100, blank=False, null=False)
+    bill_number = models.CharField(max_length=100, blank=False, null=False)
+
+    ship_add = models.TextField(max_length=1000, blank=False, null=False)
+    ship_city = models.CharField(max_length=100, blank=False, null=False)
+    ship_division = models.CharField(max_length=100, blank=False, null=False)
+    ship_country = models.CharField(max_length=100, blank=False, null=False)
+    ship_number = models.CharField(max_length=100, blank=False, null=False)
+

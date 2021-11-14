@@ -45,6 +45,5 @@ __pycache__/
 .idea/
 .vscode/
 .env
-db.sqlite3
 migrations
 media/
