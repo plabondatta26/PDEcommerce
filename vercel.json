@@ -1,0 +1,26 @@
+{
+    "version":2,
+    "builds":[
+        {
+            "src":"PDEcommerce/wsgi.py",
+            "use":"@vercel/python",
+            "config": {"maxLamdaSize":"15mb", "runtime":"python3.7"}
+        },
+        {
+             "src":"build_files.sh",
+            "use":"@vercel/static-build",
+            "distDir": "staticfiles-build"
+        }
+    ],
+    "routes":[
+        {
+            "src":"/static/(.*)",
+            "dest":"static/$1"
+        },
+        
+        {
+            "src":"/(.*)",
+            "dest":"PDEcommerce/wsgi.py"
+        }
+    ]
+}
