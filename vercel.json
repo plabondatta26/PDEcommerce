@@ -4,7 +4,7 @@
         {
             "src":"PDEcommerce/wsgi.py",
             "use":"@vercel/python",
-            "config": {"maxLamdaSize":"15mb", "runtime":"python3.6"}
+            "config": {"maxLamdaSize":"25mb", "runtime":"python3.6"}
         },
         {
              "src":"build_files.sh",
